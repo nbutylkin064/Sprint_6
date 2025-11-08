@@ -1,5 +1,4 @@
 import allure
-import time
 from pages.main_page import MainPage
 from data import TestData
 
@@ -17,7 +16,7 @@ class TestLogoClick:
         
         with allure.step('Проверить переход на главную страницу'):
             assert main_page.is_main_page_loaded(), "Не произошел переход на главную страницу"
-            current_url = driver.current_url
+            current_url = main_page.get_current_url()
             assert current_url == TestData.BASE_URL, \
                 f"Ожидался URL: {TestData.BASE_URL}, но получен: {current_url}"
 
@@ -29,15 +28,10 @@ class TestLogoClick:
             main_page.click_yandex_logo()
         
         with allure.step('Переключиться на новую вкладку'):
-            # Ждем открытия новой вкладки
-            time.sleep(2)
             main_page.switch_to_new_tab()
-            # Ждем загрузки страницы
-            time.sleep(3)
             main_page.wait_for_page_load()
         
         with allure.step('Проверить переход на Дзен'):
             current_url = main_page.get_current_url()
-            # Дзен может делать редиректы, поэтому проверяем наличие dzen.ru в URL
             assert 'dzen.ru' in current_url, \
                 f"Ожидался переход на Дзен, но текущий URL: {current_url}"

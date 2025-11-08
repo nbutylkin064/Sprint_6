@@ -1,6 +1,5 @@
 import allure
 import pytest
-import time
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 from data import TestData
@@ -20,9 +19,6 @@ class TestOrderPage:
             TestData.ORDER_DATA_1['address'],
             TestData.ORDER_DATA_1['phone']
         )
-        
-        # Добавляем задержку перед заполнением второй страницы
-        time.sleep(3)
         
         order_page.fill_second_page(
             TestData.ORDER_DATA_1['date'],
@@ -45,9 +41,6 @@ class TestOrderPage:
             TestData.ORDER_DATA_2['address'],
             TestData.ORDER_DATA_2['phone']
         )
-        
-        # Добавляем задержку перед заполнением второй страницы
-        time.sleep(3)
         
         order_page.fill_second_page(
             TestData.ORDER_DATA_2['date'],
